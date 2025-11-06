@@ -26,7 +26,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Server error', error: err.message });
 });
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/car_portal', {
+mongoose.connect(process.env.MONGO_URI, {
+ 
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
