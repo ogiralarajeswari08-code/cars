@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-
+MONGO_URI="mongodb+srv://ogiralarajeswari08_db_user:RajiReddy@cluster0.68omnlq.mongodb.net/?appName=Cluster0"
 const authRoutes = require('./routes/authRoutes');
 const carRoutes = require('./routes/carRoutes');
 
@@ -26,11 +26,12 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Server error', error: err.message });
 });
 
-mongoose.connect(process.env.MONGO_URI, {
- 
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
+// if (MONGO_URI) {
+//   console.error('FATAL ERROR: MONGO_URI is not defined in .env file.');
+//   process.exit(1);
+// }
+
+mongoose.connect(MONGO_URI).then(() => {
   console.log('MongoDB connected');
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }).catch(err => {
